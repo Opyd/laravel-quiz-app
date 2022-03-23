@@ -17,6 +17,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     public $timestamps = false;
+    protected $primaryKey = 'id';
     protected $fillable = [
         'first_name',
         'last_name',
@@ -39,5 +40,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password'
     ];
+    public function classes(){
+      return $this->belongsToMany(MClass::class, 'students_classes');
+    }
 
 }

@@ -20,6 +20,8 @@ class EnsureTeacher
         if(Auth::check()){
             if(Auth::user()->isTeacher()){
                 return $next($request);
+            }else{
+              return redirect('student');
             }
         }
         return redirect('login');

@@ -10,10 +10,15 @@
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+
                         </div>
                     @endif
-
+                      @if(\Illuminate\Support\Facades\Auth::user()->isTeacher())
+                        <a href="/teacher">Panel nauczyciela</a>
+                      @else
+                        <a href="/student">Panel ucznia</a>
+                      @endif
+                      <br />
                     {{ __('You are logged in!') }}
                 </div>
             </div>
