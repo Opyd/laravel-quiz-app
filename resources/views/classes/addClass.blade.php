@@ -8,7 +8,7 @@
           <div class="card-header">Dodawanie testu</div>
 
           <div class="card-body">
-{{--            <form method="POST" action="{{ route('addTest') }}">--}}
+            <form method="POST" action="{{ route('addClass') }}">
               @csrf
               <div class="row mb-3">
                 <label for="name" class="col-md-4 col-form-label text-md-end">Nazwa</label>
@@ -26,26 +26,25 @@
               </div>
               <div class="row mb-3">
                 <select multiple name="students[]">
-                @foreach($students as $s)
-                <option value="{{$s['id']}}">{{$s['first_name']}} {{$s['last_name']}}</option>
-                @endforeach
+                  @foreach($students as $s)
+                    <option value="{{$s['id']}}">{{$s['first_name']}} {{$s['last_name']}}</option>
+                  @endforeach
                 </select>
-                </div>
               </div>
-
-
-
-              <div class="row mb-0">
-                <div class="col-md-6 offset-md-4">
-                  <button type="submit" class="btn btn-primary">
-                    Dodaj
-                  </button>
-                </div>
-              </div>
-            </form>
           </div>
+
+
+          <div class="row mb-0">
+            <div class="col-md-6 offset-md-4">
+              <button type="submit" class="btn btn-primary">
+                Dodaj
+              </button>
+            </div>
+          </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
 @endsection

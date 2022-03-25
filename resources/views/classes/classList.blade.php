@@ -2,7 +2,7 @@
 @section('content')
   <div class="container">
     <a href="/teacher/addClass">
-      <button type="button" class="btn btn-outline-primary">Dodaj test</button>
+      <button type="button" class="btn btn-outline-primary">Dodaj klasę</button>
     </a>
 
     <table class="table">
@@ -23,7 +23,7 @@
             </ul>
           </td>
           <td>
-            <form method="post" action="{{route('delTest', $t['id'])}}">
+            <form method="post" action="{{route('delClass', $t['id'])}}">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="submit" value="Usuń">
             </form>

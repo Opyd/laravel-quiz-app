@@ -34,7 +34,6 @@ class UserController extends Controller
   public function editStudent(int $id)
   {
     $s = User::find($id);
-
     return view('teacher.editStudent', ['s' => $s]);
   }
 

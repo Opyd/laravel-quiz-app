@@ -16,4 +16,5 @@ class Test extends Model
     public function exercises(){
       return $this->belongsToMany(Exercise::class, 'test_exercises');
     }
+
 }

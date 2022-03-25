@@ -78,5 +78,6 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], functio
     $students = \App\Models\User::all()->where('isTeacher','=','0');
     return view('classes.addClass', ['students' => $students]);
   });
-
+  Route::post('/addClass', [\App\Http\Controllers\ClassController::class, 'addClass'])->name('addClass');
+  Route::post('/delClass',[\App\Http\Controllers\ClassController::class, 'delClass'])->name('delClass');
 });
