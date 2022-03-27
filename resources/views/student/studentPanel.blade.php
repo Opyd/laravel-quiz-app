@@ -12,7 +12,7 @@
               <div class="card-body">
                 <h5 class="card-title">Test</h5>
                 <p class="card-text">{{$t->title}}</p>
-                <a href="#" class="btn btn-primary">Rozwiąż</a>
+                <a href="student/test/{{$t->id}}" class="btn btn-primary">Rozwiąż</a>
               </div>
             </div>
           </div>

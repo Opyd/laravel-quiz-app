@@ -1,36 +1,16 @@
 @extends('app')
 @section('content')
   <div class="container">
-    <a href="/teacher/addTest">
-      <button type="button" class="btn btn-outline-primary">Dodaj test</button>
-    </a>
-
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Nazwa</th>
-        <th>Pytania</th>
-      </tr>
-      @foreach($tests as $t)
-        <tr>
-          <td>{{$t['id']}}</td>
-          <td>{{$t['title']}}</td>
-          <td>
-            <ul>
-              @foreach($t->exercises as $e)
-                <li>{{$e->question}}</li>
-              @endforeach
-            </ul>
-          </td>
-          <td>
-            <form method="post" action="{{route('delTest', $t['id'])}}">
-              <input type="hidden" name="_token" value="{{csrf_token()}}">
-              <input type="submit" value="Usuń">
-            </form>
-          </td>
-        </tr>
+    <form method="post">
+      @foreach($test as $question)
+        <h2>{{$question[1]}}</h2>
+        @for($i = 0; $i < 4; $i++)
+          <input type="radio" name="{{$question[0]}}" value="{{$question[3][$i]}}"> {{$question[3][$i]}} <br/>
+        @endfor
+        <hr>
       @endforeach
-    </table>
+      <input type="submit" value="Prześlij" class="btn btn-outline-primary">
+    </form>
   </div>
   <!-- Optional JavaScript; choose one of the two! -->
 

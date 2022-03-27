@@ -35,6 +35,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['ensureStudent']], functio
     return view('student.studentPanel', ['student' => \Illuminate\Support\Facades\Auth::user()]);
 //    return Auth::user()->tests;
   });
+  Route::get('/test/{id}', [\App\Http\Controllers\TestController::class, 'attemptTest'])->middleware('canFillTest');
 });
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], function () {
