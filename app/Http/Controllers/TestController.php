@@ -31,6 +31,6 @@ class TestController extends Controller
         $exToTest->exercise_id=$e;
         $exToTest->save();
       }
-      redirect('/teacher/tests');
+      return redirect('/teacher/tests');
     }
 }

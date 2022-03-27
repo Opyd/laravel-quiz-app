@@ -9,7 +9,9 @@
       <tr>
         <th>ID</th>
         <th>Nazwa</th>
-        <th>Pytania</th>
+        <th>Uczniowie</th>
+        <th>Testy</th>
+        <th colspan="2">Ustawienia</th>
       </tr>
       @foreach($class as $t)
         <tr>
@@ -23,15 +25,53 @@
             </ul>
           </td>
           <td>
+            <ul>
+              @foreach($t->tests as $test)
+                <li>{{$test->title}}</li>
+              @endforeach
+            </ul>
+          </td>
+          <td>
             <form method="post" action="{{route('delClass', $t['id'])}}">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
               <input type="submit" value="Usuń">
             </form>
           </td>
-          {{--          <td><a href="/teacher/student/{{$student['id']}}">Edytuj</a></td>--}}
+          <td><a href="/teacher/class/{{$t['id']}}">Edytuj</a></td>
         </tr>
       @endforeach
     </table>
+    Przypisz test dla klasy:
+    <form method="post" action="{{route('addTestToClass')}}">
+      <input type="hidden" name="_token" value="{{csrf_token()}}">
+      <select name="class">
+        @foreach($class as $c)
+          <option value="{{$c->id}}">{{$c->name}}</option>
+        @endforeach
+      </select>
+      <select name="test">
+        @foreach($tests as $s)
+          <option value="{{$s->id}}">{{$s->title}}</option>
+        @endforeach
+      </select>
+      <input type="submit" value="Dodaj">
+    </form>
+    Dodaj ucznia do klasy:
+    <br/>
+    <form method="post" action="{{route('addStudentToClass')}}">
+      <input type="hidden" name="_token" value="{{csrf_token()}}">
+      <select name="class">
+        @foreach($class as $c)
+          <option value="{{$c->id}}">{{$c->name}}</option>
+        @endforeach
+      </select>
+      <select name="student">
+        @foreach($students as $s)
+          <option value="{{$s->id}}">{{$s->first_name}} {{$s->last_name}}</option>
+        @endforeach
+      </select>
+      <input type="submit" value="Dodaj">
+    </form>
   </div>
   <!-- Optional JavaScript; choose one of the two! -->
 

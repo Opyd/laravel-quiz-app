@@ -1,6 +1,19 @@
 @extends('app')
 
 @section('content')
+  <script>
+    $( document ).ready(function (){
+      $(':checkbox').change(function (){
+        if($(':checkbox').is(':checked')){
+          $('#password').prop('disabled', true);
+          $('#password-confirm').prop('disabled', true);
+        }else{
+          $('#password').prop('disabled', false);
+          $('#password-confirm').prop('disabled', false);
+        }
+      });
+    });
+  </script>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -15,7 +28,8 @@
                 <label for="first_name" class="col-md-4 col-form-label text-md-end" val>Imię</label>
 
                 <div class="col-md-6">
-                  <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ $s->first_name }}" required autocomplete="first_name" autofocus>
+                  <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror"
+                         name="first_name" value="{{ $s->first_name }}" required autocomplete="first_name" autofocus>
 
                   @error('first_name')
                   <span class="invalid-feedback" role="alert">
@@ -28,7 +42,8 @@
                 <label for="last_name" class="col-md-4 col-form-label text-md-end">Nazwisko</label>
 
                 <div class="col-md-6">
-                  <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ $s->last_name }}" required autocomplete="last_name" autofocus>
+                  <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror"
+                         name="last_name" value="{{ $s->last_name }}" required autocomplete="last_name" autofocus>
 
                   @error('first_name')
                   <span class="invalid-feedback" role="alert">
@@ -42,7 +57,8 @@
                 <label for="email" class="col-md-4 col-form-label text-md-end">Adres e-mail</label>
 
                 <div class="col-md-6">
-                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $s->email }}" required autocomplete="email">
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                         value="{{ $s->email }}" required autocomplete="email">
 
                   @error('email')
                   <span class="invalid-feedback" role="alert">
@@ -56,7 +72,8 @@
                 <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                 <div class="col-md-6">
-                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                  <input id="password" disabled type="password" class="form-control @error('password') is-invalid @enderror"
+                         name="password" required autocomplete="new-password">
 
                   @error('password')
                   <span class="invalid-feedback" role="alert">
@@ -67,14 +84,17 @@
               </div>
 
               <div class="row mb-3">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                <label for="password-confirm"
+                       class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
                 <div class="col-md-6">
-                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                  <input id="password-confirm" disabled type="password" class="form-control" name="password_confirmation"
+                         required autocomplete="new-password">
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="leave-password" class="col-md-4 col-form-label text-md-end">{{ 'Nie zmieniaj hasła' }}</label>
+                <label for="leave-password"
+                       class="col-md-4 col-form-label text-md-end">{{ 'Nie zmieniaj hasła' }}</label>
 
                 <div class="col-md-6">
                   <input id="leave-password" type='checkbox' checked name="leave-password" value="yes" class="form">

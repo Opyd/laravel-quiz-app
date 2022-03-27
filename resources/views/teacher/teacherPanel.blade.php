@@ -13,7 +13,22 @@
     <a href="/teacher/classes">
       <button type="button" class="btn btn-outline-primary">Klasy</button>
     </a>
+    <table class="table">
+      <thead>
+      <th>Imie</th>
+      <th>Nazwisko</th>
+      <th>Email</th>
+      <th></th>
+      </thead>
+      <tr>
+        <td>{{$teacher->first_name}}</td>
+        <td>{{$teacher->last_name}}</td>
+        <td>{{$teacher->email}}</td>
+        <td><a href="/teacher/student/{{\Illuminate\Support\Facades\Auth::user()->id}}">Edytuj</a></td>
+      </tr>
+    </table>
   </div>
+
 
 
 

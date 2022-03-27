@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Test_class extends Model
 {
+  public $timestamps = false;
   protected $table = 'tests_classes';
     protected $fillable = [
-        'test_id', 'class_id'
+        'test_id', 'm_class_id'
     ];
 }

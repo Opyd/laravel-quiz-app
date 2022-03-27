@@ -16,4 +16,7 @@ class MClass extends Model
   public function students(){
     return $this->belongsToMany(User::class, 'students_classes');
   }
+  public function tests(){
+    return $this->belongsToMany(Test::class, 'tests_classes');
+  }
 }

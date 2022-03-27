@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/home', function () {
-  if(Auth::check()){
-    if(Auth::user()->isTeacher()){
+  if (Auth::check()) {
+    if (Auth::user()->isTeacher()) {
       return redirect('/teacher');
-    }else{
+    } else {
       return redirect('/student');
     }
   }
@@ -33,12 +33,13 @@ Auth::routes();
 Route::group(['prefix' => 'student', 'middleware' => ['ensureStudent']], function () {
   Route::get('/', function () {
     return view('student.studentPanel', ['student' => \Illuminate\Support\Facades\Auth::user()]);
+//    return Auth::user()->tests;
   });
 });
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], function () {
   Route::get('/', function () {
-    return view('teacher.teacherPanel');
+    return view('teacher.teacherPanel', ['teacher' => Auth::user()]);
   });
 
 
@@ -66,7 +67,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], functio
   // scieżki dotyczące testów
   Route::get('/tests', [\App\Http\Controllers\TestController::class, 'testList']);
   Route::post('/test/d/{id}', [\App\Http\Controllers\TestController::class, 'delTest'])->name('delTest');
-  Route::get('/addTest', function (){
+  Route::get('/addTest', function () {
     $exercises = \App\Models\Exercise::all();
     return view('tests.addTest', ['exercises' => $exercises]);
   });
@@ -74,10 +75,12 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], functio
 
   //klasy
   Route::get('/classes', [\App\Http\Controllers\ClassController::class, 'classList']);
-  Route::get('/addClass', function (){
-    $students = \App\Models\User::all()->where('isTeacher','=','0');
+  Route::get('/addClass', function () {
+    $students = \App\Models\User::all()->where('isTeacher', '=', '0');
     return view('classes.addClass', ['students' => $students]);
   });
   Route::post('/addClass', [\App\Http\Controllers\ClassController::class, 'addClass'])->name('addClass');
-  Route::post('/delClass',[\App\Http\Controllers\ClassController::class, 'delClass'])->name('delClass');
+  Route::post('/delClass/{id}', [\App\Http\Controllers\ClassController::class, 'delClass'])->name('delClass');
+  Route::post('/addTestToClass', [\App\Http\Controllers\ClassController::class, 'addTestToClass'])->name('addTestToClass');
+  Route::post('/addStudentToClass', [\App\Http\Controllers\ClassController::class, 'addStudentToClass'])->name('addStudentToClass');
 });

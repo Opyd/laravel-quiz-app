@@ -30,7 +30,7 @@
           </td>
           {{--          <td><a href="/teacher/student/{{$student['id']}}">Edytuj</a></td>--}}
         </tr>
-      @
+      @endforeach
     </table>
   </div>
   <!-- Optional JavaScript; choose one of the two! -->

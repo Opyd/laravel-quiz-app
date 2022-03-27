@@ -20,7 +20,13 @@
           <td>{{$student['first_name']}}</td>
           <td>{{$student['last_name']}}</td>
           <td>{{$student['email']}}</td>
-          <td>{{'temp'}}</td>
+          <td>
+            <ul>
+              @foreach($student['classes'] as $class)
+                <li>{{$class->name}}</li>
+              @endforeach
+            </ul>
+          </td>
           <td>
             <form method="post" action="{{route('delStudent', $student['id'])}}">
               <input type="hidden" name="_token" value="{{csrf_token()}}">

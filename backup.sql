@@ -30,10 +30,7 @@ CREATE TABLE `attempts` (
   `correct` int NOT NULL,
   KEY `test_id` (`test_id`),
   KEY `student_id` (`student_id`),
-  KEY `exercise_id` (`exercise_id`),
-  CONSTRAINT `attempts_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),
-  CONSTRAINT `attempts_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `attempts_ibfk_3` FOREIGN KEY (`exercise_id`) REFERENCES `exercises` (`id`)
+  KEY `exercise_id` (`exercise_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,7 +54,7 @@ CREATE TABLE `classes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +63,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,'IIa'),(2,'Ułomy');
+INSERT INTO `classes` VALUES (4,'II a'),(5,'I c');
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +83,7 @@ CREATE TABLE `exercises` (
   `answ_4` varchar(100) NOT NULL,
   `correct` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +92,7 @@ CREATE TABLE `exercises` (
 
 LOCK TABLES `exercises` WRITE;
 /*!40000 ALTER TABLE `exercises` DISABLE KEYS */;
-INSERT INTO `exercises` VALUES (2,'Co jest stolicą niemiec?','Berlin','Rok','Mok','Zbok',1),(3,'Co to pies','zwierze','rzecz','jedzenie','rynna',1),(4,'Jaki język jest najlepszy','Java','JavaScripit','C#','PHP',2);
+INSERT INTO `exercises` VALUES (5,'Co jest stolicą niemiec?','Berlin','Paryż','Lublin','Białograd',1),(6,'Ile nóg ma pies','1','2','3','4',4),(7,'Kto został mistrzem Europy w Piłce Nożnej w 2020','Niemcy','Francja','Polska','Włoch',4);
 /*!40000 ALTER TABLE `exercises` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,9 +107,7 @@ CREATE TABLE `students_classes` (
   `user_id` int NOT NULL,
   `m_class_id` int NOT NULL,
   KEY `user_id` (`user_id`) USING BTREE,
-  KEY `m_class_id` (`m_class_id`) USING BTREE,
-  CONSTRAINT `students_classes_ibfk_1` FOREIGN KEY (`m_class_id`) REFERENCES `classes` (`id`),
-  CONSTRAINT `students_classes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  KEY `m_class_id` (`m_class_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -122,7 +117,7 @@ CREATE TABLE `students_classes` (
 
 LOCK TABLES `students_classes` WRITE;
 /*!40000 ALTER TABLE `students_classes` DISABLE KEYS */;
-INSERT INTO `students_classes` VALUES (2,1),(4,1),(5,2);
+INSERT INTO `students_classes` VALUES (6,4),(8,4),(7,5),(7,4);
 /*!40000 ALTER TABLE `students_classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,9 +132,7 @@ CREATE TABLE `test_exercises` (
   `test_id` int NOT NULL,
   `exercise_id` int NOT NULL,
   KEY `test_id` (`test_id`),
-  KEY `exercise_id` (`exercise_id`),
-  CONSTRAINT `test_exercises_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `exercises` (`id`),
-  CONSTRAINT `test_exercises_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`)
+  KEY `exercise_id` (`exercise_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,7 +142,7 @@ CREATE TABLE `test_exercises` (
 
 LOCK TABLES `test_exercises` WRITE;
 /*!40000 ALTER TABLE `test_exercises` DISABLE KEYS */;
-INSERT INTO `test_exercises` VALUES (3,4),(5,2),(5,4);
+INSERT INTO `test_exercises` VALUES (6,5),(6,7),(7,6);
 /*!40000 ALTER TABLE `test_exercises` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +157,7 @@ CREATE TABLE `tests` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +166,7 @@ CREATE TABLE `tests` (
 
 LOCK TABLES `tests` WRITE;
 /*!40000 ALTER TABLE `tests` DISABLE KEYS */;
-INSERT INTO `tests` VALUES (3,'Programowanie'),(5,'Odklejki');
+INSERT INTO `tests` VALUES (6,'Geografia'),(7,'Biologia');
 /*!40000 ALTER TABLE `tests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,12 +179,10 @@ DROP TABLE IF EXISTS `tests_classes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tests_classes` (
   `test_id` int NOT NULL,
-  `class_id` int NOT NULL,
+  `m_class_id` int NOT NULL,
   KEY `test_id` (`test_id`),
   KEY `test_id_2` (`test_id`),
-  KEY `class_id` (`class_id`),
-  CONSTRAINT `tests_classes_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),
-  CONSTRAINT `tests_classes_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
+  KEY `class_id` (`m_class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -201,6 +192,7 @@ CREATE TABLE `tests_classes` (
 
 LOCK TABLES `tests_classes` WRITE;
 /*!40000 ALTER TABLE `tests_classes` DISABLE KEYS */;
+INSERT INTO `tests_classes` VALUES (5,1),(3,1),(6,4),(7,5),(7,4),(6,5);
 /*!40000 ALTER TABLE `tests_classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,9 +208,7 @@ CREATE TABLE `tests_students` (
   `student_id` int NOT NULL,
   KEY `test_id` (`test_id`),
   KEY `test_id_2` (`test_id`),
-  KEY `student_id` (`student_id`),
-  CONSTRAINT `tests_students_ibfk_1` FOREIGN KEY (`test_id`) REFERENCES `tests` (`id`),
-  CONSTRAINT `tests_students_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`)
+  KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -247,7 +237,7 @@ CREATE TABLE `users` (
   `password` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +246,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Zofia','Nauczycielka','zofia@o2.pl',1,'$2a$12$AnrDiwIarjZ0sYOC1XPOhuwH7eB8NvdSogAq61e46gt/DJM37jb1y'),(2,'Jan','Kowalski','janek@o2.pl',0,'$2y$10$oe7KNtfto6ERpozqkYPp0.FtewhB2We/XjrDijkYERYlbngjob5be'),(4,'XD','Dupa','asd@o2.pl',0,'$2y$10$mb85LKhqe48RvNGcntSv/.F6YUfwwh3Ju4fhmCQmIJH82i.iWQIjW'),(5,'Maciek','Gorszy','maciek@o2.pl',0,'$2y$10$goDh2ZAo5LFvFsYoDwdFIucao4NdVatLNf1rgt4Z.24sR6xm3KZ9u');
+INSERT INTO `users` VALUES (1,'Zofia','Nauczycielka','zofia@o2.pl',1,'$2a$12$AnrDiwIarjZ0sYOC1XPOhuwH7eB8NvdSogAq61e46gt/DJM37jb1y'),(6,'Robert','Kowalski','rob@o2.pl',0,'$2y$10$9AuPwIfKcimsBYiiIQQ2k.YZ1nPHRaOqep3UpxPwvkEuSItwAIeyy'),(7,'Maciej','Nowak','nowak@o2.pl',0,'$2y$10$8yv2fYFWrfx78sBdVfpalu36jKLAC5uQIHlJzutBwLkXyNay5YY6q'),(8,'Tomek','Tomalski','tomek@o2.pl',0,'$2y$10$jlH/N7293kkTtNaHQqD4a.lWQ0U8Ag.7CsY/1dYglB413jnEdU0HK');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -269,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-25 11:26:44
+-- Dump completed on 2022-03-27 15:55:45
