@@ -31,11 +31,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['prefix' => 'student', 'middleware' => ['ensureStudent']], function () {
-  Route::get('/', function () {
-    return view('student.studentPanel', ['student' => \Illuminate\Support\Facades\Auth::user()]);
-//    return Auth::user()->tests;
-  });
+  Route::get('/', [\App\Http\Controllers\TestController::class, 'studentTests']);
   Route::get('/test/{id}', [\App\Http\Controllers\TestController::class, 'attemptTest'])->middleware('canFillTest');
+  Route::post('/test/saveAttempt', [\App\Http\Controllers\TestController::class, 'saveAttempt'])->name('saveAttempt');
 });
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], function () {
@@ -43,7 +41,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], functio
     return view('teacher.teacherPanel', ['teacher' => Auth::user()]);
   });
 
-
+  Route::get('/student/results', [\App\Http\Controllers\TestController::class, 'studentResults']);
   //scieżki dotyczące uczniów
   Route::get('/students', [\App\Http\Controllers\UserController::class, 'studentList']);
   Route::get('/addStudent', function () {
@@ -53,6 +51,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['ensureTeacher']], functio
   Route::post('/student/d/{id}', [\App\Http\Controllers\UserController::class, 'delStudent'])->name('delStudent');
   Route::post('/student/{id}', [\App\Http\Controllers\UserController::class, 'saveEditStudent'])->name('saveEditStudent');
   Route::get('/student/{id}', [\App\Http\Controllers\UserController::class, 'editStudent']);
+
 
 
 //  ścieżki dotyczące pytań (pojedyńczych)

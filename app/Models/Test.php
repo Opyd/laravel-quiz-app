@@ -19,5 +19,7 @@ class Test extends Model
     public function classes(){
       return $this->belongsToMany(MClass::class, 'tests_classes');
     }
-
+    public function attempts(){
+      return $this->belongsToMany(Attempt::class, 'attempts');
+    }
 }

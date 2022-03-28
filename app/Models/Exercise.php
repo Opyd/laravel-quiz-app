@@ -16,4 +16,7 @@ class Exercise extends Model
     public function tests(){
       return $this->belongsToMany(Test::class, 'test_exercises');
     }
+    public function attempts(){
+      return $this->belongsToMany(Attempt::class, 'attempts');
+    }
 }

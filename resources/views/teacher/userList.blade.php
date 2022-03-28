@@ -12,7 +12,7 @@
         <th>Nazwisko</th>
         <th>Email</th>
         <th>Klasa</th>
-        <th>Opcje</th>
+        <th colspan="2">Opcje</th>
       </tr>
       @foreach($users as $student)
         <tr>
@@ -30,10 +30,10 @@
           <td>
             <form method="post" action="{{route('delStudent', $student['id'])}}">
               <input type="hidden" name="_token" value="{{csrf_token()}}">
-              <input type="submit" value="Usuń">
+              <input type="submit" value="Usuń" class="btn btn-danger">
             </form>
           </td>
-          <td><a href="/teacher/student/{{$student['id']}}">Edytuj</a></td>
+          <td><a href="/teacher/student/{{$student['id']}}" class="btn btn-info">Edytuj</a></td>
         </tr>
       @endforeach
     </table>

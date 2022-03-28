@@ -1,37 +1,38 @@
 @extends('app')
 @section('content')
   <div class="container">
-    <a href="/teacher/addTest">
-      <button type="button" class="btn btn-outline-primary">Dodaj test</button>
-    </a>
-
     <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Nazwa</th>
-        <th>Pytania</th>
-        <th>Ustawienia</th>
-      </tr>
-      @foreach($tests as $t)
-        <tr>
-          <td>{{$t['id']}}</td>
-          <td>{{$t['title']}}</td>
-          <td>
-            <ul>
-              @foreach($t->exercises as $e)
-                <li>{{$e->question}}</li>
-              @endforeach
-            </ul>
-          </td>
-          <td>
-            <form method="post" action="{{route('delTest', $t['id'])}}">
-              <input type="hidden" name="_token" value="{{csrf_token()}}">
-              <input type="submit" value="Usuń" class="btn btn-danger">
-            </form>
-          </td>
-        </tr>
+      <thead>
+      <th>Pytanie</th>
+      <th>Twoja odpowiedź</th>
+      <th>Poprawna odpowiedź</th>
+      <th>Poprawność</th>
+      </thead>
+      @php
+      $x = 0;
+      @endphp
+      @foreach($keys as $k)
+        @foreach($user_answers as $user)
+          @if($k['id'] == $user['id'])
+            <tr>
+              <td>{{$k['question']}}</td>
+              <td>{{$user['answer']}}</td>
+              <td>{{$k['correct']}}</td>
+              @if($k['correct']==$user['answer'])
+                @php
+                  $x++;
+                @endphp
+                <td class="border-3 border-success text-center">✅</td>
+              @else
+                <td class="border-3 border-danger text-center">❌</td>
+              @endif
+            </tr>
+          @endif
+        @endforeach
       @endforeach
     </table>
+    <h2 class="text-center">Liczba punktów: {{$x}} / {{count($user_answers)}}</h2>
+    <a href="/student/" class="btn btn-outline-primary">Zakończ test</a>
   </div>
   <!-- Optional JavaScript; choose one of the two! -->
 

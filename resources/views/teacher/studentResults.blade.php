@@ -1,18 +1,24 @@
 @extends('app')
 @section('content')
   <div class="container">
-    <form method="post" action="{{route('saveAttempt')}}">
-      <input type="hidden" name="_token" value="{{csrf_token()}}">
-      <input type="hidden" name="test_id" value="{{request()->id}}">
-      @foreach($test as $question)
-        <h2>{{$question[1]}}</h2>
-        @for($i = 0; $i < 4; $i++)
-          <input type="radio" name="{{$question[0]}}" value="{{$question[3][$i]}}" required> {{$question[3][$i]}} <br/>
-        @endfor
-        <hr>
+    <table class="table">
+      <thead>
+      <th>ID ucznia</th>
+      <th>Uczeń</th>
+      <th>Test</th>
+      <th>Liczba punktów</th>
+      <th>Max. liczba punktów</th>
+      </thead>
+      @foreach($results as $r)
+        <tr>
+          <td>{{$r->id}}</td>
+          <td>{{$r->student}}</td>
+          <td>{{$r->test}}</td>
+          <td>{{$r->pkt}}</td>
+          <td>{{$r->max_pkt}}</td>
+        </tr>
       @endforeach
-      <input type="submit" value="Prześlij" class="btn btn-outline-primary">
-    </form>
+    </table>
   </div>
   <!-- Optional JavaScript; choose one of the two! -->
 

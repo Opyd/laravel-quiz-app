@@ -13,6 +13,9 @@
     <a href="/teacher/classes">
       <button type="button" class="btn btn-outline-primary">Klasy</button>
     </a>
+    <a href="/teacher/student/results">
+      <button type="button" class="btn btn-outline-primary">Wyniki</button>
+    </a>
     <table class="table">
       <thead>
       <th>Imie</th>
