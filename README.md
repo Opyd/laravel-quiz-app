@@ -1,21 +1,25 @@
-NTW
-Lista 1 (termin 29.03.2022)
-Zadanie 1 (50 pkt.)
-Proszę przygotować aplikację WEB w wybranym frameworku MVC dla PHP. Aplikacja ma mieć formę
-systemu do testowania wiedzy za pośrednictwem testów jednokrotnego wyboru. Aplikacja ma być
-zrealizowana zgodnie z założeniami:
-• W systemie jest jedno konto użytkownika typu nauczyciel, oraz dowolna ilość kont
-użytkowników typu uczeń. Nauczyciel może:
-o zarządzać swoim kontem
-o zarządzać (dodawać, usuwać, edytować) uczniów
-o grupować uczniów w klasy
-o zarządzać własnym bankiem pytań oraz poprawnych dla nich odpowiedzi (pytaniami
-zarządzamy niezależnie od testów)
-o tworzyć zestawy pytań w postaci testu (pytania wybieramy z banku pytań) i
-przypisywać go do wybranych uczniów lub do całych klas
-o przeglądać wyniki osiagnięte przez uczniów
-• uczeń loguje się do aplikacji, wybiera jeden z przeznaczonych dla niego i nie rozwiązanych
-jeszcze testów i odpowiada na przedstwione mu pytania, na końcu system wyjaśnia mu
-popełnione błędy i podsumowuje ilosć poprawnie rozwiązanych pytań,
-• wyświetlając test aplikcja losuje kolejność zadawanych pytań oraz kolejność wyświetlanych
-odpowiedzi w każdnym z nich
+# ✅ Quiz app for Teachers and Students
+
+##  ☁ Description
+This webapp allows teachers to create accounts for students, assign them in groups. Then the teacher can create tests using the database of questions he has created.
+After logging in to the website, the student can complete the assigned tests. At the end, he will see a summary with the errors explained.
+# 🛠 Functionality
+
+## 👨‍🏫 Teacher can:
+
+ - Create questions
+ - Create tests using the questions
+ - Create student accounts
+ - Put students in groups
+ - Assign tests to groups
+ - View student results
+ 
+## 👨‍🎓 Student can:
+ - View the tests assigned to him
+ - Complete the tests assigned to him
+ - Read an explanation of the test errors
+
+# 👨‍💻 Tech stack
+
+ - This project uses [Laravel framework](https://laravel.com/)  (v9.4.1). Laravel is a web application framework written in PHP.
+ - For persistent storage (database), the app uses MySQL.
