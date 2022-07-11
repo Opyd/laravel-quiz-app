@@ -25,6 +25,7 @@ After logging in to the website, the student can complete the assigned tests. At
  - This project uses [Laravel framework](https://laravel.com/)  (v9.4.1). Laravel is a web application framework written in PHP.
  - For a neat appearance, this project uses [blade](https://laravel.com/docs/9.x/blade) templates and [Bootstrap](https://getbootstrap.com/)
  - For persistent storage (database), the app uses MySQL.
+ - App is fully dockerized
 
 ## ⚡ Project features 
  - Taking advantage of the MVC design pattern
